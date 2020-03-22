@@ -359,8 +359,11 @@
                 <span>Redux</span>
         </a>
         <div class="abstract-content">
-            Redux
-
+            要注意的是，Redux 和 React-redux 并不是同一个东西。Redux 是一种架构模式（Flux 架构的一种变种），它不关注你到底用什么库，你可以把它应用到 React 和 Vue，甚至跟 jQuery 结合都没有问题。而 React-redux 就是把 Redux 这种架构模式和 React.js 结合起来的一个库，就是 Redux 架构在 React.js 中的体现。
+模块(组件)之间可以共享数据 ,也可以修改数据,但是数据并不能直接修改,只能执行某些我允许的某些修改
+dispatch专门负责数据的修改
+可以在组件发生某个事件时调用
+所有对数据的操作必须通过 dispatc...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -493,9 +496,16 @@
     
     
     
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 3
+        Total : 4
         </div>
         <!-- search  -->
         
@@ -508,6 +518,11 @@
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/22</span><a class="archive-post-title" href= "/2020/03/22/React_Redux/" >React Redux</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -532,6 +547,8 @@
         <span class="sidebar-tag-name" data-tags="intro"><span class="iconfont-archer">&#xe606;</span>intro</span>
     
         <span class="sidebar-tag-name" data-tags="Redux"><span class="iconfont-archer">&#xe606;</span>Redux</span>
+    
+        <span class="sidebar-tag-name" data-tags="react-redux"><span class="iconfont-archer">&#xe606;</span>react-redux</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
