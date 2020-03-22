@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="SuuugaZ">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="SuuugaZ">
+    
+    <meta name="keywords" content="hexo,React,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="参考资料:      《深入React技术栈》 ​     React官方文档  ​     React.js小书    《React状态管理与同构实战》  React 工作原理React把真实DOM树转换成js对象树,也就是虚拟DOM,每次数据更新后重新计算虚拟DOM,并和上一次生成的虚拟DOM做对比,对发生变化的部分做批量更新. 函数式编程:利用函数构建一个规则,返回相应的结果,这个函数可以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React">
+<meta property="og:url" content="http://yoursite.com/2020/03/20/React/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="参考资料:      《深入React技术栈》 ​     React官方文档  ​     React.js小书    《React状态管理与同构实战》  React 工作原理React把真实DOM树转换成js对象树,也就是虚拟DOM,每次数据更新后重新计算虚拟DOM,并和上一次生成的虚拟DOM做对比,对发生变化的部分做批量更新. 函数式编程:利用函数构建一个规则,返回相应的结果,这个函数可以">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/images/React/1.png">
+<meta property="article:published_time" content="2020-03-20T11:15:06.244Z">
+<meta property="article:modified_time" content="2020-03-22T05:53:23.279Z">
+<meta property="article:author" content="SuuugaZ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/React/1.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>React · Genius Lab</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >Genius Lab.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">React</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>Genius Lab.</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            React
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">3.2k</span>Reading time: <span class="post-count reading-time">12 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/03/20</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <blockquote>
+<p>参考资料:  </p>
+<p>   《深入React技术栈》</p>
+<p>​     React官方文档 </p>
+<p>​     React.js小书</p>
+<p>   《React状态管理与同构实战》</p>
+</blockquote>
+<h2 id="React-工作原理"><a href="#React-工作原理" class="headerlink" title="React 工作原理"></a>React 工作原理</h2><p>React把真实DOM树转换成js对象树,也就是虚拟DOM,每次数据更新后重新计算虚拟DOM,并和上一次生成的虚拟DOM做对比,对发生变化的部分做批量更新.</p>
+<p><strong>函数式编程:利用函数构建一个规则,返回相应的结果,这个函数可以被多次利用</strong></p>
+<p>React通过创建与更新虚拟元素(virtual element)来管理整个虚拟DOM</p>
+<p>React中创建的虚拟元素可以分为两类:DOM 元素和组件元素,分别对应着原生 DOM 元素与自定义元素</p>
+<h2 id="JSX语法"><a href="#JSX语法" class="headerlink" title="JSX语法"></a>JSX语法</h2><p>JSX类似于HTML,可以用来创建虚拟元素(element)</p>
+<p><strong>元素标签的属性</strong></p>
+<p>DOM 元素的属性 是标准规范属性，但有两个例外——class 和 for</p>
+<p>class 属性改为 className； </p>
+<p> for 属性改为 htmlFor</p>
+<p><strong>自定义 HTML 属性</strong> </p>
+<p>如果在 JSX 中往 DOM 元素中传入自定义属性，React 是不会渲染的： </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div d=<span class="string">"xxx"</span>&gt;content&lt;<span class="regexp">/div&gt; </span></span><br><span class="line"><span class="regexp">如果要使用 HTML 自定义属性，要使用 data- 前缀，这与 HTML 标准也是一致的： </span></span><br><span class="line"><span class="regexp">&lt;div data-attr="xxx"&gt;content&lt;/</span>div&gt; </span><br><span class="line">然而，在自定义标签中任意的属性都是被支持的：</span><br></pre></td></tr></table></figure>
+
+<p><x-my-component custom-attr="foo" /> 以 aria- 开头的属性同样可以正常使用： </p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div aria-hidden=&#123;<span class="literal">true</span>&#125;&gt;&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>JavaScript 属性表达式</strong> </p>
+<p>属性值要使用表达式，要用 {}</p>
+<h2 id="React组件"><a href="#React组件" class="headerlink" title="React组件"></a>React组件</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li><p><strong>Function Component 无状态组件</strong></p>
+<p>无生命周期</p>
+</li>
+<li><p><strong>Class Component 有状态组件</strong></p>
+<p>有生命周期</p>
+<p><strong>常用生命周期方法</strong></p>
+<p>render()  是 class 组件中唯一必须实现的方法。</p>
+<p><strong>constructor()</strong></p>
+<p><strong>如果不初始化 state 或不进行方法绑定，则不需要为 React 组件实现构造函数。</strong></p>
+<p>通常，在 React 中，构造函数仅用于以下两种情况：</p>
+<ul>
+<li>通过给 <code>this.state</code> 赋值对象来初始化<a href="https://react.docschina.org/docs/state-and-lifecycle.html" target="_blank" rel="noopener">内部 state</a>。</li>
+<li>为<a href="https://react.docschina.org/docs/handling-events.html" target="_blank" rel="noopener">事件处理函数</a>绑定实例</li>
+</ul>
+<p><strong>componentDidUpdate()</strong></p>
+<p><code>componentDidUpdate()</code> 会在更新后会被立即调用。首次渲染不会执行此方法。</p>
+</li>
+</ul>
+<ul>
+<li><strong>UI组件和容器组件</strong></li>
+<li><strong>高阶组件 HOC</strong></li>
+</ul>
+<h3 id="构建方式"><a href="#构建方式" class="headerlink" title="构建方式"></a>构建方式</h3><p>使用方法或类来构建</p>
+<p>官方在 React 组件构建上提供的方法：ES6 classes 和无状态 函数（stateless function）。</p>
+<p>ES6 classes</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class App extends to Component &#123;</span><br><span class="line">	constructor() &#123;</span><br><span class="line">		super()</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>无状态组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function App() &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>无状态组件只传入 props 和 context 两个参数；也就是说，它<strong>不存在 state</strong>，也没有生命周 期方法，组件本身即上面两种 React 组件构建方法中的 render 方法。不过，像 propTypes 和 defaultProps 还是可以通过向方法设置静态属性来实现的。</p>
+<p><strong>React 的所有组件都继承自顶层类 React.Component。它的定义非常简洁，只是初始化了 React.Component 方法，声明了 props、context、refs 等，并在原型上定义了 setState 和 forceUpdate 方法。内部初始化的生命周期方法与 createClass 方式使用的是同一个方法创建的</strong></p>
+<h3 id="组件的组成"><a href="#组件的组成" class="headerlink" title="组件的组成"></a>组件的组成</h3><p>属性 props</p>
+<p>状态 state</p>
+<p>生命周期方法</p>
+<p><img src="/images/React/1.png" alt=""></p>
+<p>React 组件可以接收参数，也可能有自身状态。一旦接收到的参数或自身状态有所改变， React 组件就会执行相应的生命周期方法，后渲染。整个过程完全符合传统组件所定义的组件职责</p>
+<h3 id="组件的设计"><a href="#组件的设计" class="headerlink" title="组件的设计"></a>组件的设计</h3><p>以tabbar为例,activeIndex为当前tab索引</p>
+<ul>
+<li>activeIndex在内部更新。当我们切换 tab 标签时，可以看作是组件内部的交互行为，被选择后通过回调函数返回具体选择的索引。</li>
+<li>activeIndex在外部更新。当我们切换 tab 标签时，可以看作是组件外部在传入具体的索引，而组件就像“木偶”一样被操控着。 </li>
+</ul>
+<p>我们形象地把第一种和第二种视角写成的组件分别称为智能组件（smart component）和木偶组件（dumb component）。 </p>
+<h3 id="高阶组件"><a href="#高阶组件" class="headerlink" title="高阶组件"></a>高阶组件</h3><p>(High Order Component, HOC)实际就是一个高阶函数</p>
+<p>函数可以作为参数被传递</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(() &#x3D;&gt; (...), 1000)</span><br><span class="line">把函数作为参数，所有它是一个高阶组件</span><br></pre></td></tr></table></figure>
+
+<p>函数可以作为返回值输出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function foo(x) &#123;</span><br><span class="line">	return function() &#123;</span><br><span class="line">		return x</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>应用</strong></p>
+<p>setTimeout, setInterval</p>
+<p>ajax</p>
+<p>数组中的应用 some() every() filter() map() forEach()</p>
+<p><strong>高阶组件基本概念</strong></p>
+<p>高阶组件就是接受一个组件作为参数并返回一个新组件的函数</p>
+<p>高阶组件是一个函数，并不是组件</p>
+<p><strong>如何编写</strong></p>
+<p>1 实现一个普通组件</p>
+<p>2 将普通组件使用函数包裹</p>
+<p><strong>使用高阶组件</strong></p>
+<p>1 hoc(warppedComponent)</p>
+<p>2 @ hoc</p>
+<p><strong>高阶组件只写逻辑,可以用来包裹需要实现相同操作(如:从LocalStorage中加载特定字段)的组件,实现代码复用</strong></p>
+<h2 id="React数据流"><a href="#React数据流" class="headerlink" title="React数据流"></a>React数据流</h2><p>数据是自顶向下单向流动，即从父组件到子组件。</p>
+<h2 id="React中的this"><a href="#React中的this" class="headerlink" title="React中的this"></a>React中的this</h2><p>在使用calss方式创建react组件时，它的事件处理函数并不会去主动绑定this,比如我们定义一个handleClick方法，再在这个方法中定义this.setState方法，此时this.setState的this指向类的实例，但是在render函数中调用handleClick方法中，由于找不到this,调用setState方法会报错。我们可以在constructor函数中为handleClick绑定this,或者使用箭头函数</p>
+<p>​    </p>
+<h2 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h2><ul>
+<li>声明一个变量并使用 <code>if</code> 语句进行条件渲染</li>
+<li>使用与运算符&amp;&amp;：<code>true &amp;&amp; expression</code> 总是会返回 <code>expression</code>, 而 <code>false &amp;&amp; expression</code>，react不会渲染这个元素。</li>
+<li>三目运算符：condition ? true : false</li>
+</ul>
+<h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><p><strong>受控组件 controlled component</strong></p>
+<p>每当表单的状态发生变化，都会被写入到组件的state中。</p>
+<p>总结下 React 受控组件更新 state 的流程：</p>
+<p> (1) 可以通过在初始 state 中设置表单的默认值。</p>
+<p> (2) 每当表单的值发生变化时，调用 onChange 事件处理器。</p>
+<p> (3) 事件处理器通过合成事件对象 e 拿到改变后的状态，并更新应用的 state。</p>
+<p> (4) setState 触发视图的重新渲染，完成表单组件值的更新。 </p>
+<p><strong>类似于Vue的双向数据绑定</strong></p>
+<p>1 状态属性</p>
+<p>React 的 form 组件提供了几个重要的属性，用于展示组件的状态。<br> value：类型为 text 的 input 组件、textarea 组件以及 select 组件都借助 value prop 来展示 应用的状态。 </p>
+<p> checked：类型为 radio 或 checkbox 的组件借助值为 boolean 类型的 selected prop 来展示 应用的状态。</p>
+<p>  selected：该属性可作用于 select 组件下面的 option 上，React 并不建议使用这种方式表 示状态，而推荐在 select 组件上使用 value 的方式。 </p>
+<p>2 事件属性</p>
+<p>onChange</p>
+<p><strong>处理多个输入</strong></p>
+<p>当需要处理多个input元素时，可以给每个元素添加name属性，并让处理函数更加event.target.name的值选择要执行的操作</p>
+<p><strong>非受控组件</strong></p>
+<p>使用ref提取DOM中的值</p>
+<h2 id="Fragments"><a href="#Fragments" class="headerlink" title="Fragments"></a><strong>Fragments</strong></h2><p>&lt;&gt;&lt;/&gt; 可以用来替代div</p>
+<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><p><strong>应用场景</strong></p>
+<p>通常应用于存在多个层级的组件中，如果底层组件需要获取数据，可以使用Context直接获取，避免props的层层传递</p>
+<p><strong>API</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MyContext = React.createContext(defaultValue</span><br></pre></td></tr></table></figure>
+
+<p>创建一个 Context 对象。当 React 渲染一个订阅了这个 Context 对象的组件，这个组件会从组件树中离自身最近的那个匹配的 <code>Provider</code> 中读取到当前的 context 值。</p>
+<p><strong>只有</strong>当组件所处的树中没有匹配到 Provider 时，其 <code>defaultValue</code> 参数才会生效。</p>
+<p><strong>Context.Provider</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;MyContext.Provider value=&#123;  &#125;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>每个 Context 对象都会返回一个 Provider React 组件，它允许消费组件订阅 context 的变化。</p>
+<p>当 Provider 的 <code>value</code> 值发生变化时，它内部的所有消费组件都会重新渲染。</p>
+<h2 id="key"><a href="#key" class="headerlink" title="key"></a>key</h2><p>react的key是元素的唯一标识，一般是数据的id</p>
+<h2 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h2><p>接收对象参数</p>
+<p>这里还有要注意的是，当你调用 <code>setState</code> 的时候，<em>React.js 并不会马上修改 state</em>。而是把这个对象放到一个更新队列里面，稍后才会从队列当中把新的状态提取出来合并到 <code>state</code> 当中，然后再触发组件更新。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> handleClickOnLikeButton () &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.state.isLiked)</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      isLiked: !<span class="keyword">this</span>.state.isLiked</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.state.isLiked)</span><br><span class="line">  &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>你会发现两次打印的都是 <code>false</code>，即使我们中间已经 <code>setState</code> 过一次了。这并不是什么 bug，只是 React.js 的 <code>setState</code> 把你的传进来的状态缓存起来，稍后才会帮你更新到 <code>state</code> 上，所以你获取到的还是原来的 <code>isLiked</code>。</p>
+<p>所以如果你想在 <code>setState</code> 之后使用新的 <code>state</code> 来做后续运算就做不到了，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">  handleClickOnLikeButton () &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; <span class="attr">count</span>: <span class="number">0</span> &#125;) <span class="comment">// =&gt; this.state.count 还是 undefined</span></span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; <span class="attr">count</span>: <span class="keyword">this</span>.state.count + <span class="number">1</span>&#125;) <span class="comment">// =&gt; undefined + 1 = NaN</span></span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; <span class="attr">count</span>: <span class="keyword">this</span>.state.count + <span class="number">2</span>&#125;) <span class="comment">// =&gt; NaN + 2 = NaN</span></span><br><span class="line">  &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>如果后续操作依赖前一个setState，应该使用函数作为参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this.setState(</span><br><span class="line">	(preState, props) &#x3D;&gt; &#123;&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h2><p><strong>父 -&gt; 子</strong></p>
+<p>props</p>
+<p><strong>子 -&gt;</strong> <strong>父</strong></p>
+<p>父组件使用子组件的参数和方法</p>
+<p>先判断父组件需要什么数据以及如何操作这些数据，然后父组件给子组件传递一个方法，这个方法会保存在子组件的props中，子组件点击（或其它操作）时调用这个方法，并将子组件的数据传入，在父组件中就可以拿到这些数据并进行后续操作</p>
+<blockquote>
+<p>提示：父组件需要什么数据，在子组件进行什么操作时要进行传递，通过on开头的事件监听方法传递数据</p>
+</blockquote>
+<p>父组件需要comment数据，父组件给子组件传递一个on方法,在子组件触发点击事件时，判断props中有无该方法，如果有就调用，并把所需的参数传入</p>
+<p>父组件 需要index来删除相应的数据</p>
+<p>中间组件 在子组件触发handleDelete方法时传递index </p>
+<p>子组件 在点击删除按钮时通过调用父组件的函数传递index值（index值通过props.index获取</p>
+<p>handleDelete(index) {    </p>
+<p>​    comments.splice(index, 1)</p>
+<p>}</p>
+<List onDelete={this.handleDelete} />
+
+<p>====================================</p>
+<p>handleDelete(index) {</p>
+<pre><code>//调用父组件的onDelete方法，把index值传给父组件</code></pre><p>​    if(this.props.onDelete) {</p>
+<p>​        onDelete(index)</p>
+<p>​    }</p>
+<p>}</p>
+<comment onDelete={this.handleDelete} index={i}/>
+
+<p>==========================================</p>
+<p>handleDelete() {</p>
+<p>​    if(this.props.onDelete) {</p>
+<p>​        onDelete(this.props.index)</p>
+<p>​    }</p>
+<p>}</p>
+<span onClick={this.handleDelete} />
+
+
+
+
+
+<h2 id="状态提升"><a href="#状态提升" class="headerlink" title="状态提升"></a>状态提升</h2><p>当某个状态被多个组件<em>依赖</em>或者<em>影响</em>的时候，就把该状态提升到这些组件的最近公共父组件中去管理，用 <code>props</code> 传递<em>数据或者函数</em>来管理这种<em>依赖</em>或着<em>影响</em>的行为。</p>
+<h2 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h2><p><strong>组件的挂载</strong></p>
+<p>将组件渲染并且构造DOM元素然后插入页面的过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">constructor（）</span><br><span class="line"></span><br><span class="line">render()</span><br><span class="line"></span><br><span class="line">componentWillMount()</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;构造dom元素插入页面</span><br><span class="line"></span><br><span class="line">componentDidMount()</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>组件的更新</strong></p>
+<p>关于更新阶段的组件生命周期：</p>
+<ol>
+<li><code>shouldComponentUpdate(nextProps, nextState)</code>：你可以通过这个方法控制组件是否重新渲染。如果返回 <code>false</code> 组件就不会重新渲染。这个生命周期在 React.js 性能优化上非常有用。</li>
+<li><code>componentWillReceiveProps(nextProps)</code>：组件从父组件接收到新的 <code>props</code> 之前调用。</li>
+<li><code>componentWillUpdate()</code>：组件开始重新渲染之前调用。</li>
+<li><code>componentDidUpdate()</code>：组件重新渲染并且把更改变更到真实的 DOM 以后调用。</li>
+</ol>
+<h2 id="ref属性"><a href="#ref属性" class="headerlink" title="ref属性"></a>ref属性</h2><p>ref属性可以用来获取已经挂载的元素的DOM节点</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input ref=&#123;(input) =&gt; <span class="keyword">this</span>.input = input&#125; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p>ref属性值是一个函数，当input元素在页面上挂载完成后，React.js会调用这个函数，并且把这个挂载以后的DOM节点传给这个函数。在函数中我们把这个DOM元素设置为组件实例的一个属性，这样以后我们就可以通过this.input获取这个DOM元素，并且可以在 <code>componentDidMount</code> 中使用这个 DOM 元素，并且调用 <code>this.input.focus()</code> 的 DOM API。整体就达到了页面加载完成就自动 focus 到输入框的功能。</p>
+<p>组件挂载完成后可以调用API，和componentDidMount搭配使用</p>
+<h2 id="容器组件"><a href="#容器组件" class="headerlink" title="容器组件"></a>容器组件</h2><p>this.props.children 表示组件的所有子节点</p>
+<p><code>this.props.children</code> 的值有三种可能：如果当前组件没有子节点，它就是 <code>undefined</code> ;如果有一个子节点，数据类型是 <code>object</code> ；如果有多个子节点，数据类型就是 <code>array</code> </p>
+<p>React 提供一个工具方法 <a href="https://facebook.github.io/react/docs/top-level-api.html#react.children" target="_blank" rel="noopener"><code>React.Children</code></a> 来处理 <code>this.props.children</code> 。我们可以用 <code>React.Children.map</code> 来遍历子节点，而不用担心 <code>this.props.children</code> 的数据类型是 <code>undefined</code> 还是 <code>object</code>。</p>
+<h2 id="propTypes-组件参数验证"><a href="#propTypes-组件参数验证" class="headerlink" title="propTypes 组件参数验证"></a>propTypes 组件参数验证</h2><p> 安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save prop-types</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入模块</span></span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">	prop: PropTypes.object </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PropTypes.array</span><br><span class="line">PropTypes.bool</span><br><span class="line">PropTypes.func</span><br><span class="line">PropTypes.number</span><br><span class="line">PropTypes.object</span><br><span class="line">PropTypes.string</span><br><span class="line">PropTypes.node</span><br><span class="line">PropTypes.element</span><br></pre></td></tr></table></figure>
+
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="http://yoursite.com">SuuugaZ</a>
+            <p>原文链接：<a href="http://yoursite.com/2020/03/20/React/">http://yoursite.com/2020/03/20/React/</a>
+            <p>发表日期：<a href="http://yoursite.com/2020/03/20/React/">March 20th 2020, 7:15:06 pm</a>
+            <p>更新日期：<a href="http://yoursite.com/2020/03/20/React/">March 22nd 2020, 1:53:23 pm</a>
+            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2020/03/21/Redux/" title= "Redux">
+                    <div class="nextTitle">Redux</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/03/20/hello-world/" title= "Hello World">
+                    <div class="prevTitle">Hello World</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:zhu_lulan@163.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/SuuugaZ" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#React-工作原理"><span class="toc-number">1.</span> <span class="toc-text">React 工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSX语法"><span class="toc-number">2.</span> <span class="toc-text">JSX语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React组件"><span class="toc-number">3.</span> <span class="toc-text">React组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分类"><span class="toc-number">3.1.</span> <span class="toc-text">分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构建方式"><span class="toc-number">3.2.</span> <span class="toc-text">构建方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件的组成"><span class="toc-number">3.3.</span> <span class="toc-text">组件的组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件的设计"><span class="toc-number">3.4.</span> <span class="toc-text">组件的设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高阶组件"><span class="toc-number">3.5.</span> <span class="toc-text">高阶组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React数据流"><span class="toc-number">4.</span> <span class="toc-text">React数据流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React中的this"><span class="toc-number">5.</span> <span class="toc-text">React中的this</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#条件渲染"><span class="toc-number">6.</span> <span class="toc-text">条件渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表单"><span class="toc-number">7.</span> <span class="toc-text">表单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fragments"><span class="toc-number">8.</span> <span class="toc-text">Fragments</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Context"><span class="toc-number">9.</span> <span class="toc-text">Context</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#key"><span class="toc-number">10.</span> <span class="toc-text">key</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#setState"><span class="toc-number">11.</span> <span class="toc-text">setState</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#父子组件通信"><span class="toc-number">12.</span> <span class="toc-text">父子组件通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#状态提升"><span class="toc-number">13.</span> <span class="toc-text">状态提升</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组件的生命周期"><span class="toc-number">14.</span> <span class="toc-text">组件的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ref属性"><span class="toc-number">15.</span> <span class="toc-text">ref属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器组件"><span class="toc-number">16.</span> <span class="toc-text">容器组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#propTypes-组件参数验证"><span class="toc-number">17.</span> <span class="toc-text">propTypes 组件参数验证</span></a></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 3
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/21</span><a class="archive-post-title" href= "/2020/03/21/Redux/" >Redux</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2020/03/20/React/" >React</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/20</span><a class="archive-post-title" href= "/2020/03/20/hello-world/" >Hello World</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+        <span class="sidebar-tag-name" data-tags="intro"><span class="iconfont-archer">&#xe606;</span>intro</span>
+    
+        <span class="sidebar-tag-name" data-tags="Redux"><span class="iconfont-archer">&#xe606;</span>Redux</span>
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "SuuugaZ"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
