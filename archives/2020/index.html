@@ -354,6 +354,41 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2020/06/28/Dva/" >
+            
+                <span>Dva</span>
+        </a>
+        <div class="abstract-content">
+            DVA参考文档：https://github.com/dvajs/dva-knowledgemap#javascript-%E8%AF%AD%E8%A8%80
+如何触发数据改变: 1 用户交互行为 2浏览器行为(路由跳转)
+当此类行为会改变数据的时候可以通过 dispatch 发起一个 action，如果是同步行为会直接通过 Reducers 改变 State ，如果是异步行为（副作用）会先触发 Effects 然后流向 Reducers 最终改变 State
+
+如何使用effects:
+在同步方法中通过dispatch方法派发action调用 type: effects函数名称
+act...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/06/28</span>
+            </div>
+            <!-- tags  -->
+            
+            <div class= abstract-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "dva,redux">dva,redux</a>
+    
+</div>
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2020/06/28/Git/" >
             
                 <span>Git</span>
@@ -655,9 +690,16 @@ Mo...
     
     
     
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 5
+        Total : 6
         </div>
         <!-- search  -->
         
@@ -670,6 +712,11 @@ Mo...
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/28</span><a class="archive-post-title" href= "/2020/06/28/Dva/" >Dva</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -710,6 +757,8 @@ Mo...
         <span class="sidebar-tag-name" data-tags="react"><span class="iconfont-archer">&#xe606;</span>react</span>
     
         <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
+    
+        <span class="sidebar-tag-name" data-tags="dva,redux"><span class="iconfont-archer">&#xe606;</span>dva,redux</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>

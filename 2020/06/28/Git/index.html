@@ -27,14 +27,11 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Git一 使用Git对仓库(项目)进行管理1 在工作目录中初始化新仓库要对现有的某个项目开始用 Git 管理，只需到此项目所在的目录，执行： 1$ git init  初始化后，在当前目录下会出现一个名为 .git 的目录，所有 Git 需要的数据和资源都存放在这个目录中。 如果当前目录下有几个文件想要纳入版本控制，需要先用 git add 命令告诉 Git 开始对这些文件进行跟踪，然后提交： 1">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="c:%5CUsers%5Cadmin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1590465885417.png">
-<meta property="og:image" content="c:%5CUsers%5Cadmin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1590734450539.png">
 <meta property="article:published_time" content="2020-06-28T09:00:22.159Z">
-<meta property="article:modified_time" content="2020-06-28T09:31:32.326Z">
+<meta property="article:modified_time" content="2020-06-28T09:37:01.135Z">
 <meta property="article:author" content="SuuugaZ">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:%5CUsers%5Cadmin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1590465885417.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
@@ -429,8 +426,6 @@ height:50vh;
 
 <p>使用git clone命令来抓取模块A的代码仓库，但要同时抓取到子模块的仓库</p>
 <p>$ git clone –recurse-submodules <a href="https://xxx/xxx" target="_blank" rel="noopener">https://xxx/xxx</a></p>
-<p><img src="C:%5CUsers%5Cadmin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1590465885417.png" alt="1590465885417"></p>
-<p><img src="C:%5CUsers%5Cadmin%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1590734450539.png" alt="1590734450539"></p>
 <h2 id="二-仓库基本管理"><a href="#二-仓库基本管理" class="headerlink" title="二 仓库基本管理"></a>二 仓库基本管理</h2><h3 id="什么是仓库"><a href="#什么是仓库" class="headerlink" title="什么是仓库"></a>什么是仓库</h3><p>​        在 Git 的概念中，仓库，就是你存在<code>.git</code>目录的那个文件夹内的所有文件，包括隐藏的文件，Git程序会再当前目录以及上级目录查找是否存在<code>.git</code>文件，如果存在，则会将<code>.git</code>目录存在的文件夹开始下的所有文件当成你需要管理的文件，所以，我们如果想将某个文件夹当做一个Git仓库，你可以在那个文件夹下通过终端(Window为Cmd或者PoewrShell或者Bash)来执行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
 
@@ -535,13 +530,18 @@ height:50vh;
             <p>Author：<a href="http://yoursite.com">SuuugaZ</a>
             <p>原文链接：<a href="http://yoursite.com/2020/06/28/Git/">http://yoursite.com/2020/06/28/Git/</a>
             <p>发表日期：<a href="http://yoursite.com/2020/06/28/Git/">June 28th 2020, 5:00:22 pm</a>
-            <p>更新日期：<a href="http://yoursite.com/2020/06/28/Git/">June 28th 2020, 5:31:32 pm</a>
+            <p>更新日期：<a href="http://yoursite.com/2020/06/28/Git/">June 28th 2020, 5:37:01 pm</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
     <!-- paginator  -->
     <ul class="post-paginator">
         <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2020/06/28/Dva/" title= "Dva">
+                    <div class="nextTitle">Dva</div>
+                </a>
             
         </li>
         <li class="previous">
@@ -716,9 +716,16 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 5
+        Total : 6
         </div>
         <!-- search  -->
         
@@ -731,6 +738,11 @@ top:50vh;
     
     <div class="archive-year"> 2020 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/28</span><a class="archive-post-title" href= "/2020/06/28/Dva/" >Dva</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -771,6 +783,8 @@ top:50vh;
         <span class="sidebar-tag-name" data-tags="react"><span class="iconfont-archer">&#xe606;</span>react</span>
     
         <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
+    
+        <span class="sidebar-tag-name" data-tags="dva,redux"><span class="iconfont-archer">&#xe606;</span>dva,redux</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
