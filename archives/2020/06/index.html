@@ -356,11 +356,17 @@
     <article class="index-post">
         <a class="abstract-title" href = "/2020/06/28/Git/" >
             
-                <span>Hello World</span>
+                <span>Git</span>
         </a>
         <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+            Git一 使用Git对仓库(项目)进行管理1 在工作目录中初始化新仓库要对现有的某个项目开始用 Git 管理，只需到此项目所在的目录，执行：
+1$ git init
 
+初始化后，在当前目录下会出现一个名为 .git 的目录，所有 Git 需要的数据和资源都存放在这个目录中。
+如果当前目录下有几个文件想要纳入版本控制，需要先用 git add 命令告诉 Git 开始对这些文件进行跟踪，然后提交：
+123$ git add *.c$ git add README$ git commit -m &#39;initial project version&#39;
+
+稍后我们再逐一解释每条命令的意...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -371,7 +377,7 @@
             
             <div class= abstract-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "intro">intro</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "git">git</a>
     
 </div>
             
@@ -525,7 +531,7 @@
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">06/28</span><a class="archive-post-title" href= "/2020/06/28/Git/" >Hello World</a>
+            <span class="archive-post-date">06/28</span><a class="archive-post-title" href= "/2020/06/28/Git/" >Git</a>
         </li>
     
     
@@ -560,6 +566,8 @@
         <span class="sidebar-tag-name" data-tags="react-redux"><span class="iconfont-archer">&#xe606;</span>react-redux</span>
     
         <span class="sidebar-tag-name" data-tags="react"><span class="iconfont-archer">&#xe606;</span>react</span>
+    
+        <span class="sidebar-tag-name" data-tags="git"><span class="iconfont-archer">&#xe606;</span>git</span>
     
     </div>
     <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
